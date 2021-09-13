@@ -106,6 +106,7 @@ async def generate_cover(title, thumbnail):
 
 
 @Client.on_message(command(["playlist", f"playlist@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@authorized_users_only
 async def playlist(client, message):
     global que
     if message.chat.id in DISABLED_GROUPS:
@@ -232,6 +233,7 @@ async def hfmm(_, message):
 
 
 @Client.on_callback_query(filters.regex(pattern=r"^(playlist)$"))
+@authorized_users_only
 async def p_cb(b, cb):
     global que    
     que.get(cb.message.chat.id)
@@ -416,6 +418,7 @@ async def m_cb(b, cb):
 
 
 @Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
+@authorized_users_only
 async def play(_, message: Message):
     global que
     global useer
@@ -792,6 +795,7 @@ async def lol_cb(b, cb):
 
 
 @Client.on_message(command(["ytp", f"ytp@{BOT_USERNAME}"]) & other_filters)
+@authorized_users_only
 async def ytplay(_, message: Message):
     global que
     if message.chat.id in DISABLED_GROUPS:
